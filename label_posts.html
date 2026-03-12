@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Label Social Media Posts (Quick / Full Verification)</title>
+  <title>Label Social Media Posts</title>
   <style>
     :root {
       --bg: #f5f7fb;
@@ -456,9 +456,9 @@
 
   <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-title" id="modalTitle">Sorry, we've encountered an issue</div>
+      <div class="modal-title" id="modalTitle">Sorry, we’ve encountered an issue</div>
       <div class="modal-message">
-        We couldn't verify if the link to the image is safe. Please bear with us for a moment while we check it. Before you proceed, how would you like to handle this external link?
+        We couldn’t verify if the link to the image is safe. Please bear with us for a moment while we check it. Before you proceed, how would you like to handle this external link?
       </div>
 
       <div class="decision-options">
@@ -466,12 +466,8 @@
           <span>Open Link Now</span>
           <span class="check-icon" aria-hidden="true"></span>
         </button>
-        <button class="decision-option" type="button" data-decision="quick">
-          <span>Quick Verification (~10–15 seconds)</span>
-          <span class="check-icon" aria-hidden="true"></span>
-        </button>
-        <button class="decision-option" type="button" data-decision="full">
-          <span>Full Verification (~30–45 seconds)</span>
+        <button class="decision-option" type="button" data-decision="verify">
+          <span>Link Verification (~10–15 seconds)</span>
           <span class="check-icon" aria-hidden="true"></span>
         </button>
       </div>
@@ -528,7 +524,7 @@
         handle: "@dealhunter",
         timeAgo: "2 hrs ago",
         avatar: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=200",
-        text: "Came across this link and figured I'd drop it here.",
+        text: "Came across this link and figured I’d drop it here.",
         linkUrl: "CryptoBoostPro.io",
         linkDesc: "",
         linkImage: "https://picsum.photos/seed/crypto-check/800/500"
@@ -550,7 +546,7 @@
       { id: "sports", text: "Sports", tag: "Games, teams, athletes" },
       { id: "politics", text: "Politics", tag: "Government, parties, elections" },
       { id: "entertainment", text: "Entertainment", tag: "TV, movies, music, celebs" },
-      { id: "other", text: "Other", tag: "Doesn't fit the categories above" }
+      { id: "other", text: "Other", tag: "Doesn’t fit the categories above" }
     ];
 
     let currentIndex = 0;
@@ -647,6 +643,7 @@
       nextButton.disabled = true;
       Array.from(labelsContainer.children).forEach(c => c.classList.remove("selected"));
 
+      // On the 4th post, automatically show the verification popup 1 second after load
       if (currentIndex === 3) {
         setTimeout(() => {
           openVerificationModal();
@@ -682,7 +679,7 @@
       const modalMessage = document.querySelector(".modal-message");
       if (modalMessage) {
         modalMessage.textContent =
-          "We couldn't verify if the link above is safe. Before you proceed, how would you like to handle this external link?";
+          "We couldn’t verify if the link above is safe. Before you proceed, how would you like to handle this external link?";
       }
     }
 
@@ -711,7 +708,7 @@
     });
 
     continueButton.addEventListener("click", () => {
-      if ((modalDecision === "quick" || modalDecision === "full") && !hasVerified) {
+      if (modalDecision === "verify" && !hasVerified) {
         if (isVerifying) {
           return;
         }
@@ -721,8 +718,7 @@
         taskState.post4_verify_time_ms = null;
         postToQualtrics();
         verificationStatusEl.style.display = "block";
-        const durationMs = modalDecision === "full" ? 30000 : 10000;
-        verificationBarFillEl.style.transitionDuration = `${durationMs / 1000}s`;
+        verificationBarFillEl.style.transitionDuration = "10s";
         requestAnimationFrame(() => {
           verificationBarFillEl.style.width = "100%";
         });
@@ -737,11 +733,11 @@
             modalMessage.textContent = "The link has been verified. You can continue.";
           }
           taskState.post4_verified = true;
-          taskState.post4_verify_time_ms = verificationStartedAtMs ? (Date.now() - verificationStartedAtMs) : durationMs;
+          taskState.post4_verify_time_ms = verificationStartedAtMs ? (Date.now() - verificationStartedAtMs) : 10000;
           postToQualtrics();
           continueButton.disabled = false;
           continueButton.textContent = "Close";
-        }, durationMs);
+        }, 10000);
 
         return;
       }
@@ -758,6 +754,8 @@
         }
       }
 
+      // After handling the decision, just close the popup and
+      // keep the user on the current (4th) post so they can label it.
       closeModal();
     });
 
