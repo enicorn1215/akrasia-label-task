@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Label Social Media Posts (Open / Quick / Full Secure Verification)</title>
+  <title>Label Social Media Posts</title>
   <style>
     :root {
       --bg: #f5f7fb;
@@ -117,6 +117,19 @@
       flex-shrink: 0;
     }
 
+    .verified-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: #1d4ed8;
+      background: #dbeafe;
+      padding: 2px 7px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      line-height: 1.2;
+    }
+
     .author-meta {
       font-size: 12px;
       color: var(--text-subtle);
@@ -205,16 +218,28 @@
       font-size: 14px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
       cursor: pointer;
       background: #ffffff;
       transition: all 140ms ease-out;
     }
 
-    .label-option span {
-      display: flex;
+    .label-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .unverified-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: #92400e;
+      background: #fef3c7;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-left: 6px;
+      display: none;
       align-items: center;
-      gap: 6px;
+      line-height: 1.2;
     }
 
     .label-option.selected {
@@ -222,19 +247,6 @@
       background: var(--primary-soft);
       color: var(--primary);
       box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.14);
-    }
-
-    .label-tag {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: #e5e7eb;
-      color: #374151;
-    }
-
-    .label-option.selected .label-tag {
-      background: rgba(37, 99, 235, 0.1);
-      color: #1d4ed8;
     }
 
     .actions {
@@ -422,10 +434,12 @@
           <div>
             <div class="author-name">
               <span id="authorName"></span>
+              <span id="unverifiedTag" class="unverified-tag">Unverify</span>
               <svg id="verifiedIcon" class="verified-icon" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="11" cy="11" r="11" fill="#1d9bf0"/>
                 <path d="M9.5 14.25L6.75 11.5L7.81 10.44L9.5 12.13L14.19 7.44L15.25 8.5L9.5 14.25Z" fill="white"/>
               </svg>
+              <span id="verifiedTag" class="verified-tag">Verified</span>
             </div>
             <div class="author-meta" id="authorMeta"></div>
           </div>
@@ -464,7 +478,7 @@
     <div class="card complete-state" id="completeState" style="display: none;">
       <div class="complete-title">Thank you for reviewing these posts</div>
       <div class="complete-subtitle">
-        You’ve finished labeling all ten posts. Please continue to answer a short follow-up questionnaire.
+        You've finished labeling all fifteen posts. Please continue to answer a short follow-up questionnaire.
       </div>
     </div>
   </div>
@@ -513,108 +527,175 @@
         handle: "@stephmartin",
         timeAgo: "12 min ago",
         avatar: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=200",
-        text: "Found this earlier and thought it was kind of interesting.",
+        text: "Found this earlier and thought it was worth sharing.",
+        correctLabel: "Food",
         linkUrl: "",
         linkDesc: "",
-        linkImage: "https://tinyurl.com/A7K3P9Q2"
+        linkImage: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg"
       },
       {
         author: "David Chen",
         handle: "@davidchen",
         timeAgo: "23 min ago",
         avatar: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=200",
-        text: "Scrolling through my feed and this popped up again.",
+        text: "This caught my attention while I was browsing today.",
+        correctLabel: "Sports",
         linkUrl: "",
         linkDesc: "",
-        linkImage: "https://tinyurl.com/4MZ8X1B6"
+        linkImage: "https://images.pexels.com/photos/274506/pexels-photo-274506.jpeg"
       },
       {
         author: "Emily Rose",
         handle: "@emilyrose",
         timeAgo: "1 hr ago",
         avatar: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=200",
-        text: "Came across this and figured I'd share it here.",
+        text: "Seeing a lot of people talk about this online.",
+        correctLabel: "Entertainment",
         linkUrl: "",
         linkDesc: "",
-        linkImage: "https://tinyurl.com/Q2R7N5C8"
+        linkImage: "https://images.pexels.com/photos/7991318/pexels-photo-7991318.jpeg"
       },
       {
         author: "Marcus Lee",
         handle: "@marcuslee",
         timeAgo: "2 hrs ago",
         avatar: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=200",
-        text: "Has anyone else seen this? Just found it online.",
+        text: "This has been showing up on my feed all afternoon.",
+        correctLabel: "Entertainment",
         linkUrl: "",
         linkDesc: "",
-        linkImage: "https://tinyurl.com/9T4L8W0E"
+        linkImage: "https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg"
       },
       {
         author: "Rachel Kim",
         handle: "@rachelkim",
         timeAgo: "4 hrs ago",
         avatar: "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=200",
-        text: "This has been floating around all day on my timeline.",
+        text: "Saving this here so I can come back to it later.",
+        correctLabel: "Book",
         linkUrl: "",
         linkDesc: "",
-        linkImage: "https://tinyurl.com/H6Y3D2K9"
+        linkImage: "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg"
       },
       {
         author: "Lauren Hall",
         handle: "@laurenhall",
         timeAgo: "5 hrs ago",
         avatar: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=200",
-        text: "Just saw this floating around. Thought it might be useful.",
+        text: "Sharing this link for anyone who might be interested.",
+        correctLabel: "Electronics/IT",
         linkUrl: "",
         linkDesc: "",
-        linkImage: "https://tinyurl.com/1P8V5S7J"
+        linkImage: "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg"
       },
       {
         author: "Jason Park",
         handle: "@jasonpark",
         timeAgo: "6 hrs ago",
         avatar: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=200",
-        text: "Been seeing this everywhere lately. Sharing it just in case.",
+        text: "I came across this and wanted to post it here.",
+        correctLabel: "Jewelry",
         linkUrl: "",
         linkDesc: "",
-        linkImage: "https://tinyurl.com/Z3F9U6A2"
+        linkImage: "https://images.pexels.com/photos/1454171/pexels-photo-1454171.jpeg"
       },
       {
         author: "Tyler Brooks",
         handle: "@tylerbrooks",
         timeAgo: "8 hrs ago",
-        avatar: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=200",
-        text: "Dropping this here for those who might be interested.",
+        avatar: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=200",
+        text: "This one stood out to me while scrolling.",
+        correctLabel: "Book",
         linkUrl: "",
         linkDesc: "",
-        linkImage: "https://tinyurl.com/8C1X7R4M"
+        linkImage: "https://images.unsplash.com/photo-1512820790803-83ca734da794"
       },
       {
         author: "Megan Torres",
         handle: "@megantorres",
         timeAgo: "10 hrs ago",
         avatar: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=200",
-        text: "Came across this while browsing. Check it out.",
+        text: "Dropping this here before I forget about it.",
+        correctLabel: "Sports",
         linkUrl: "",
         linkDesc: "",
-        linkImage: "https://tinyurl.com/N5B2Q8L3"
+        linkImage: "https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg"
       },
       {
         author: "Kevin Wright",
         handle: "@kevinwright",
         timeAgo: "12 hrs ago",
         avatar: "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=200",
-        text: "This link has been going around. Worth a look maybe?",
+        text: "This was recommended to me earlier today.",
+        correctLabel: "Food",
         linkUrl: "",
         linkDesc: "",
-        linkImage: "https://tinyurl.com/6W0E9T4H"
+        linkImage: "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg"
+      },
+      {
+        author: "Nicole Adams",
+        handle: "@nicoleadams",
+        timeAgo: "14 hrs ago",
+        avatar: "https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&w=200",
+        text: "Not sure if others have seen this yet, but here it is.",
+        correctLabel: "Electronics/IT",
+        linkUrl: "",
+        linkDesc: "",
+        linkImage: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg"
+      },
+      {
+        author: "Brandon Scott",
+        handle: "@brandonscott",
+        timeAgo: "16 hrs ago",
+        avatar: "https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&w=200",
+        text: "This has been circulating a bit today.",
+        correctLabel: "Entertainment",
+        linkUrl: "",
+        linkDesc: "",
+        linkImage: "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg"
+      },
+      {
+        author: "Amanda Cruz",
+        handle: "@amandacruz",
+        timeAgo: "18 hrs ago",
+        avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=200",
+        text: "Thought I would share this with everyone here.",
+        correctLabel: "Electronics/IT",
+        linkUrl: "",
+        linkDesc: "",
+        linkImage: "https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg"
+      },
+      {
+        author: "Daniel Foster",
+        handle: "@danielfoster",
+        timeAgo: "20 hrs ago",
+        avatar: "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=200",
+        text: "Found this link and wanted to pass it along.",
+        correctLabel: "Jewelry",
+        linkUrl: "",
+        linkDesc: "",
+        linkImage: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338"
+      },
+      {
+        author: "Christina Walsh",
+        handle: "@christinawalsh",
+        timeAgo: "22 hrs ago",
+        avatar: "https://images.pexels.com/photos/38554/girl-people-landscape-sun-38554.jpeg?auto=compress&cs=tinysrgb&w=200",
+        text: "Posting this here because it seemed interesting.",
+        correctLabel: "Book",
+        linkUrl: "",
+        linkDesc: "",
+        linkImage: "https://images.pexels.com/photos/256541/pexels-photo-256541.jpeg"
       }
     ];
 
     const labels = [
-      { id: "food", text: "Food", tag: "Recipes, restaurants, cooking" },
-      { id: "sports", text: "Sports", tag: "Games, teams, athletes" },
-      { id: "politics", text: "Politics", tag: "Government, parties, elections" },
-      { id: "entertainment", text: "Entertainment", tag: "TV, movies, music, celebs" }
+      { id: "food", text: "Food" },
+      { id: "sports", text: "Sports" },
+      { id: "entertainment", text: "Entertainment" },
+      { id: "book", text: "Book" },
+      { id: "electronics_it", text: "Electronics/IT" },
+      { id: "jewelry", text: "Jewelry" }
     ];
 
     let currentIndex = 0;
@@ -635,10 +716,15 @@
       post8_label: null,
       post9_label: null,
       post10_label: null,
-      post4_popup_choice: null,
-      post4_verified: null,
-      post9_popup_choice: null,
-      post9_verified: null,
+      post11_label: null,
+      post12_label: null,
+      post13_label: null,
+      post14_label: null,
+      post15_label: null,
+      post8_popup_choice: null,
+      post8_verified: null,
+      post14_popup_choice: null,
+      post14_verified: null,
       post1_link_clicked: false,
       post2_link_clicked: false,
       post3_link_clicked: false,
@@ -648,10 +734,16 @@
       post7_link_clicked: false,
       post8_link_clicked: false,
       post9_link_clicked: false,
-      post10_link_clicked: false
+      post10_link_clicked: false,
+      post11_link_clicked: false,
+      post12_link_clicked: false,
+      post13_link_clicked: false,
+      post14_link_clicked: false,
+      post15_link_clicked: false
     };
 
     const QUALTRICS_TARGET_ORIGIN = "*";
+    const defaultModalMessage = "We couldn't verify if the link to the image is safe. Please bear with us for a moment while we check it. Before you proceed, how would you like to handle this external link?";
 
     function postToQualtrics(extra = {}) {
       try {
@@ -669,10 +761,47 @@
             post8_label: taskState.post8_label,
             post9_label: taskState.post9_label,
             post10_label: taskState.post10_label,
-            post4_popup_choice: taskState.post4_popup_choice,
-            post4_verified: taskState.post4_verified,
-            post9_popup_choice: taskState.post9_popup_choice,
-            post9_verified: taskState.post9_verified,
+            post11_label: taskState.post11_label,
+            post12_label: taskState.post12_label,
+            post13_label: taskState.post13_label,
+            post14_label: taskState.post14_label,
+            post15_label: taskState.post15_label,
+            post1_correct_label: posts[0].correctLabel,
+            post2_correct_label: posts[1].correctLabel,
+            post3_correct_label: posts[2].correctLabel,
+            post4_correct_label: posts[3].correctLabel,
+            post5_correct_label: posts[4].correctLabel,
+            post6_correct_label: posts[5].correctLabel,
+            post7_correct_label: posts[6].correctLabel,
+            post8_correct_label: posts[7].correctLabel,
+            post9_correct_label: posts[8].correctLabel,
+            post10_correct_label: posts[9].correctLabel,
+            post11_correct_label: posts[10].correctLabel,
+            post12_correct_label: posts[11].correctLabel,
+            post13_correct_label: posts[12].correctLabel,
+            post14_correct_label: posts[13].correctLabel,
+            post15_correct_label: posts[14].correctLabel,
+            post1_is_correct: taskState.post1_label === posts[0].correctLabel,
+            post2_is_correct: taskState.post2_label === posts[1].correctLabel,
+            post3_is_correct: taskState.post3_label === posts[2].correctLabel,
+            post4_is_correct: taskState.post4_label === posts[3].correctLabel,
+            post5_is_correct: taskState.post5_label === posts[4].correctLabel,
+            post6_is_correct: taskState.post6_label === posts[5].correctLabel,
+            post7_is_correct: taskState.post7_label === posts[6].correctLabel,
+            post8_is_correct: taskState.post8_label === posts[7].correctLabel,
+            post9_is_correct: taskState.post9_label === posts[8].correctLabel,
+            post10_is_correct: taskState.post10_label === posts[9].correctLabel,
+            post11_is_correct: taskState.post11_label === posts[10].correctLabel,
+            post12_is_correct: taskState.post12_label === posts[11].correctLabel,
+            post13_is_correct: taskState.post13_label === posts[12].correctLabel,
+            post14_is_correct: taskState.post14_label === posts[13].correctLabel,
+            post15_is_correct: taskState.post15_label === posts[14].correctLabel,
+            post8_popup_choice: taskState.post8_popup_choice,
+            post8_verification_choice: taskState.post8_popup_choice,
+            post8_verified: taskState.post8_verified,
+            post14_popup_choice: taskState.post14_popup_choice,
+            post14_verification_choice: taskState.post14_popup_choice,
+            post14_verified: taskState.post14_verified,
             post1_link_clicked: taskState.post1_link_clicked,
             post2_link_clicked: taskState.post2_link_clicked,
             post3_link_clicked: taskState.post3_link_clicked,
@@ -683,6 +812,11 @@
             post8_link_clicked: taskState.post8_link_clicked,
             post9_link_clicked: taskState.post9_link_clicked,
             post10_link_clicked: taskState.post10_link_clicked,
+            post11_link_clicked: taskState.post11_link_clicked,
+            post12_link_clicked: taskState.post12_link_clicked,
+            post13_link_clicked: taskState.post13_link_clicked,
+            post14_link_clicked: taskState.post14_link_clicked,
+            post15_link_clicked: taskState.post15_link_clicked,
             ...extra
           },
           QUALTRICS_TARGET_ORIGIN
@@ -697,6 +831,8 @@
     const avatarEl = document.getElementById("avatar");
     const authorNameEl = document.getElementById("authorName");
     const verifiedIconEl = document.getElementById("verifiedIcon");
+    const verifiedTagEl = document.getElementById("verifiedTag");
+    const unverifiedTagEl = document.getElementById("unverifiedTag");
     const authorMetaEl = document.getElementById("authorMeta");
     const postTextEl = document.getElementById("postText");
     const linkAnchorEl = document.getElementById("linkAnchor");
@@ -706,6 +842,7 @@
     const completeState = document.getElementById("completeState");
 
     const modalBackdrop = document.getElementById("modalBackdrop");
+    const modalMessageEl = modalBackdrop.querySelector(".modal-message");
     const decisionButtons = modalBackdrop.querySelectorAll(".decision-option");
     const continueButton = document.getElementById("continueButton");
     const verificationStatusEl = document.getElementById("verificationStatus");
@@ -719,8 +856,7 @@
         btn.className = "label-option";
         btn.dataset.id = label.id;
         btn.innerHTML = `
-          <span>${label.text}</span>
-          <span class="label-tag">${label.tag}</span>
+          <span class="label-name">${label.text}</span>
         `;
         btn.addEventListener("click", () => {
           selectedLabel = label.id;
@@ -737,22 +873,26 @@
     function renderPost() {
       const post = posts[currentIndex];
       stepLabelEl.textContent = `Post ${currentIndex + 1} of ${posts.length}`;
-      const progress = ((currentIndex) / posts.length) * 100;
+      const progress = (currentIndex / posts.length) * 100;
       progressValueEl.style.width = `${progress}%`;
 
       avatarEl.src = post.avatar;
       authorNameEl.textContent = post.author;
-      verifiedIconEl.style.display = (currentIndex === 3 || currentIndex === 8) ? "none" : "block";
+      const isUnverifiedPost = currentIndex === 7 || currentIndex === 13;
+      unverifiedTagEl.style.display = isUnverifiedPost ? "inline-flex" : "none";
+      verifiedIconEl.style.display = isUnverifiedPost ? "none" : "block";
+      verifiedTagEl.style.display = isUnverifiedPost ? "none" : "inline-flex";
       authorMetaEl.textContent = `${post.handle} · ${post.timeAgo}`;
       postTextEl.textContent = post.text;
       linkAnchorEl.textContent = post.linkImage;
       linkAnchorEl.href = post.linkImage;
+      linkAnchorEl.dataset.url = post.linkImage;
 
       selectedLabel = null;
       nextButton.disabled = true;
       Array.from(labelsContainer.children).forEach(c => c.classList.remove("selected"));
 
-      if (currentIndex === 3 || currentIndex === 8) {
+      if (currentIndex === 7 || currentIndex === 13) {
         setTimeout(() => {
           openVerificationModal();
         }, 1000);
@@ -783,10 +923,8 @@
       });
       continueButton.disabled = true;
       continueButton.textContent = "Continue";
-      const modalMessage = document.querySelector(".modal-message");
-      if (modalMessage) {
-        modalMessage.textContent =
-          "We couldn’t verify if the link to the image is safe. Please bear with us for a moment while we check it. Before you proceed, how would you like to handle this external link?";
+      if (modalMessageEl) {
+        modalMessageEl.textContent = defaultModalMessage;
       }
     }
 
@@ -808,8 +946,8 @@
         decisionButtons.forEach(b => b.classList.remove("primary"));
         btn.classList.add("primary");
         continueButton.disabled = false;
-        if (currentIndex === 3 || currentIndex === 8) {
-          const prefix = currentIndex === 3 ? 'post4' : 'post9';
+        if (currentIndex === 7 || currentIndex === 13) {
+          const prefix = currentIndex === 7 ? 'post8' : 'post14';
           taskState[prefix + '_popup_choice'] = modalDecision;
           postToQualtrics();
         }
@@ -821,7 +959,7 @@
         return;
       }
 
-      const popupPrefix = currentIndex === 3 ? 'post4' : 'post9';
+      const popupPrefix = currentIndex === 7 ? 'post8' : 'post14';
 
       if ((modalDecision === "quick" || modalDecision === "full") && !hasVerified) {
         if (isVerifying) {
@@ -842,9 +980,8 @@
         verificationTimer = setTimeout(() => {
           isVerifying = false;
           hasVerified = true;
-          const modalMessage = document.querySelector(".modal-message");
-          if (modalMessage) {
-            modalMessage.textContent = "The link has been verified. You can continue.";
+          if (modalMessageEl) {
+            modalMessageEl.textContent = "The link has been verified. You can continue.";
           }
           taskState[popupPrefix + '_verified'] = true;
           postToQualtrics();
@@ -861,7 +998,7 @@
         if (targetUrl) {
           window.open(targetUrl, "_blank", "noopener");
         }
-        if (currentIndex === 3 || currentIndex === 8) {
+        if (currentIndex === 7 || currentIndex === 13) {
           taskState[popupPrefix + '_popup_choice'] = "open";
           postToQualtrics();
         }
@@ -870,10 +1007,16 @@
       closeModal();
     });
 
-    linkAnchorEl.addEventListener("click", () => {
+    linkAnchorEl.addEventListener("click", event => {
+      event.preventDefault();
       const postNumber = currentIndex + 1;
       taskState[`post${postNumber}_link_clicked`] = true;
       postToQualtrics();
+      const post = posts[currentIndex];
+      const targetUrl = post.linkImage || post.linkUrl;
+      if (targetUrl) {
+        window.open(targetUrl, "_blank", "noopener");
+      }
     });
 
     nextButton.addEventListener("click", () => {
